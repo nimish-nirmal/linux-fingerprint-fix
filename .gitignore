@@ -1,0 +1,8 @@
+# This .gitignore file will ignore files that are not necessary to be tracked in the repository.
+
+# Sub Agents
+.agents
+
+# VScode settings
+.vscode
+
