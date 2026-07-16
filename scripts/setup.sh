@@ -47,7 +47,12 @@ preflight_checks() {
             exit 1
         fi
     fi
-    log_info "Detected OS: $(. /etc/os-release && echo "$NAME $VERSION_ID" 2>/dev/null || echo "Unknown")"
+    local os_name os_version
+    # shellcheck disable=SC1091
+    os_name=$(. /etc/os-release 2>/dev/null && echo "${NAME:-Unknown}") || os_name="Unknown"
+    # shellcheck disable=SC1091
+    os_version=$(. /etc/os-release 2>/dev/null && echo "${VERSION_ID:-}") || os_version=""
+    log_info "Detected OS: ${os_name} ${os_version}"
     log_ok "Pre-flight checks passed."
 }
 
